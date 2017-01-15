@@ -37,3 +37,75 @@ def A(n, x):
         for num in nums:
             num_seq += A(num, x)
     return num_seq
+
+
+def B(n, x):
+    """
+    Calculate the number of sequences of length n in which the longest run of
+    heads OR tails does not exceed x.
+
+    Parameters
+    ----------
+    n : int
+        sequence length
+    x : int
+        longest run of heads or tails
+
+    Returns
+    -------
+    num_seq : int
+        number of sequences
+
+    Examples
+    --------
+    >>> number_of_sequences = B(9, 4)
+    """
+    return A(n-1, x-1)
+
+
+def prob_longest_head_run(n, x):
+    """
+    Calculate the probability of observing the number of sequences of length n
+    in which the longest run of heads does not exceed x.
+
+    Parameters
+    ----------
+    n : int
+        sequence length
+    x : int
+        longest run of heads
+
+    Returns
+    -------
+    prob : float
+        probability of observing the calculated number of sequences
+
+    Examples
+    --------
+    >>> probability = prob_longest_head_run(8, 3)
+    """
+    return float(A(n, x)) / 2**n
+
+
+def prob_longest_head_or_tail_run(n, x):
+    """
+    Calculate the probability of observing the number of sequences of length n
+    in which the longest run of heads OR tails does not exceed x.
+
+    Parameters
+    ----------
+    n : int
+        sequence length
+    x : int
+        longest run of heads or tails
+
+    Returns
+    -------
+    prob : float
+        probability of observing the calculated number of sequences
+
+    Examples
+    --------
+    >>> probability = prob_longest_head_or_tail_run(9, 4)
+    """
+    return float(A(n-1, x-1)) / 2**(n-1)
