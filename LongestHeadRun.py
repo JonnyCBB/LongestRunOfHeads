@@ -60,7 +60,10 @@ def B(n, x):
     --------
     >>> number_of_sequences = B(9, 4)
     """
-    return A(n-1, x-1)
+    if x == 0:
+        return 0
+    else:
+        return 2 * A(n-1, x-1)
 
 
 def prob_longest_head_run(n, x):
@@ -108,4 +111,4 @@ def prob_longest_head_or_tail_run(n, x):
     --------
     >>> probability = prob_longest_head_or_tail_run(9, 4)
     """
-    return float(A(n-1, x-1)) / 2**(n-1)
+    return float(B(n, x)) / 2**(n-1)
