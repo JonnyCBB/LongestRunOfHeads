@@ -8,7 +8,7 @@ Schilling, Mark F. "The longest run of heads." College Math. J 21.3 (1990):
 import numpy as np
 
 
-def A(n, x):
+def A_fair(n, x):
     """
     Calculate the number of sequences of length n in which the longest run of
     heads does not exceed x.
@@ -35,11 +35,11 @@ def A(n, x):
     else:
         nums = n - 1 - np.arange(x+1)
         for num in nums:
-            num_seq += A(num, x)
+            num_seq += A_fair(num, x)
     return num_seq
 
 
-def B(n, x):
+def B_fair(n, x):
     """
     Calculate the number of sequences of length n in which the longest run of
     heads OR tails does not exceed x.
@@ -63,10 +63,10 @@ def B(n, x):
     if x == 0:
         return 0
     else:
-        return 2 * A(n-1, x-1)
+        return 2 * A_fair(n-1, x-1)
 
 
-def prob_longest_head_run(n, x):
+def prob_longest_head_run_fair(n, x):
     """
     Calculate the probability of observing the number of sequences of length n
     in which the longest run of heads does not exceed x.
@@ -87,10 +87,10 @@ def prob_longest_head_run(n, x):
     --------
     >>> probability = prob_longest_head_run(8, 3)
     """
-    return float(A(n, x)) / 2**n
+    return float(A_fair(n, x)) / 2**n
 
 
-def prob_longest_head_or_tail_run(n, x):
+def prob_longest_head_or_tail_run_fair(n, x):
     """
     Calculate the probability of observing the number of sequences of length n
     in which the longest run of heads OR tails does not exceed x.
@@ -111,4 +111,4 @@ def prob_longest_head_or_tail_run(n, x):
     --------
     >>> probability = prob_longest_head_or_tail_run(9, 4)
     """
-    return float(B(n, x)) / 2**(n-1)
+    return float(B_fair(n, x)) / 2**(n-1)
