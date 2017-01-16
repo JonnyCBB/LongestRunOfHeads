@@ -34,13 +34,13 @@ You can generate a random coin toss sequence too.
 ```python
 # Simulate a coin toss sequence of length 10 with probability of heads 0.5
 # (e.g. a fair coin).
->>> seq = generate_random_sequence(10, 0.5)
+>>> seq = lhr.generate_random_sequence(10, 0.5)
 
 # From the sequence determine the longest run of Heads or Tails
->>> longest_run, value = determine_longest_run(seq)
+>>> longest_run, value = lhr.determine_longest_run(seq)
 
 # From the sequence determine the longest run of the specified value.
->>> longest_run, value = determine_longest_run(seq, heads_val="Head", only_heads=True)
+>>> longest_run, value = lhr.determine_longest_run(seq, heads_val="Head", only_heads=True)
 ```
 
 All methods have been thoroughly documented using the [Numpy style docstring format](http://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_numpy.html).
