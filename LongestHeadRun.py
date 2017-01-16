@@ -209,8 +209,7 @@ def prob_longest_head_run_bias(n, x, p):
 
 def generate_random_sequence(n, p):
     """
-    Simulate a coin toss sequence by generating a set of random numbers of 1's
-    and 0's from a Bernoulli distribution.
+    Simulate a coin toss sequence.
 
     Parameters
     ----------
@@ -234,7 +233,7 @@ def generate_random_sequence(n, p):
         if num == 1:
             sequence.append("Head")
         else:
-            sequence.append("Tails")
+            sequence.append("Tail")
     return sequence
 
 
