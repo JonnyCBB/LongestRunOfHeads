@@ -5,7 +5,7 @@ with the longest run of heads in a coin toss experiment. These functions are
 implementations of the methods described in [[1]](#References)
 
 ### Installation
-Currently the only way to use this package is get the code from the [Longest HeadRun.py file.](https://github.com/JonnyCBB/LongestRunOfHeads/blob/master/LongestHeadRun.py) If you use Github then you can clone the repository to obtain it by running
+Currently the only way to use this package is get the code from the [LongestHeadRun.py file.](https://github.com/JonnyCBB/LongestRunOfHeads/blob/master/LongestHeadRun.py) If you use Github then you can clone the repository to obtain it by running
 ```
 git clone https://github.com/JonnyCBB/LongestRunOfHeads.git
 ```
