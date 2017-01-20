@@ -8,6 +8,7 @@ Schilling, Mark F. "The longest run of heads." College Math. J 21.3 (1990):
 import numpy as np
 from scipy.special import binom
 from scipy.stats import bernoulli
+import math
 
 
 def A_fair(n, x):
@@ -332,3 +333,137 @@ def determine_longest_run(sequence, heads_val=None, only_heads=False):
                                                   str(entry)])
             prev_entry = entry
     return longest_run, longest_run_value
+
+
+def P(x, p):
+    """
+    Extreme value distribution.
+
+    For the distribution that approximates the normalized maximum of floor(nq)
+    independent geometric random variables with parameter p (q = 1-p), the
+    parameters of the limiting distribution are µ = 0 and σ = 1/ln(1/p)
+    respectively.
+
+    Parameters
+    ----------
+    x : float
+        maximum of floor(nq) independent geomtric randome variables
+    p : float
+        probability of a toss resulting in a head
+
+    Returns
+    -------
+    probability : float
+        The value of the probability density function at x
+
+    Examples
+    --------
+    >>> probability = p(10, 0.5)
+    """
+    return math.exp(-p**(x)) * p**(x) * math.log(1/p)
+
+
+def shilling_pdf(x, n, p):
+    """
+    Shilling probability density function.
+
+    Parameters
+    ----------
+    x : float
+        maximum number of consecutive successes.
+    n : int
+        sequence length
+    p : float
+        probability of a toss resulting in a head
+
+    Returns
+    -------
+    probability : float
+        The value of the Shilling probability density function at x
+
+    Examples
+    --------
+    >>> probability = shilling_pdf(10, 200, 0.5)
+    """
+    return P(x - shilling_expected_val(n, p), p)
+
+
+def shilling_cdf(x, n, p):
+    """
+    Shilling cumulative distribution function (sum of the probability up to but
+    not including x).
+
+    Parameters
+    ----------
+    x : float
+        maximum number of consecutive successes.
+    n : int
+        sequence length
+    p : float
+        probability of a toss resulting in a head
+
+    Returns
+    -------
+    probability : float
+        The value of the Shilling cumulative distribution function at x
+
+    Examples
+    --------
+    >>> cumulative_probability = shilling_cdf(10, 200, 0.5)
+    """
+    return math.exp(-p**(x - shilling_expected_val(n, p)))
+
+
+def shilling_expected_val(n, p, heuristic=False):
+    """
+    Expected value of the Shilling probability density function.
+
+    Parameters
+    ----------
+    n : int
+        sequence length
+    p : float
+        probability of a toss resulting in a head
+    heuristic : bool, optional (default=False)
+        determine whether to use the expected value from the heuristic
+        derivation (which is less accurate) or not. Default is not to use the
+        heuristic formula.
+
+    Returns
+    -------
+    exp_val : float
+        Expected value of the probability density function.
+
+    Examples
+    --------
+    >>> exp_val = shilling_expected_val(200, 0.5)
+    """
+    q = 1 - p
+    if heuristic:
+        return math.log(n*q, 1/p)
+    else:
+        return math.log(n*q, 1/p) + np.euler_gamma/(math.log(1/p)) - 0.5
+
+
+def shilling_variance(p):
+        """
+        Variance of the Shilling probability density function.
+
+        Notice that the variance only depends on the probability of success, p,
+        not the sequence length, n.
+
+        Parameters
+        ----------
+        p : float
+            probability of a toss resulting in a head
+
+        Returns
+        -------
+        variance : float
+            Variance of the probability density function.
+
+        Examples
+        --------
+        >>> variance = shilling_variance(0.5)
+        """
+    return (math.pi**2)/(6 * (math.log(1/p))**2) + 1/12.0
