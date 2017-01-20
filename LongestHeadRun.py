@@ -341,7 +341,7 @@ def P(x, p):
 
     For the distribution that approximates the normalized maximum of floor(nq)
     independent geometric random variables with parameter p (q = 1-p), the
-    parameters of the limiting distribution are µ = 0 and σ = 1/ln(1/p)
+    parameters of the limiting distribution are mean = 0 and sigma = 1/ln(1/p)
     respectively.
 
     Parameters
@@ -446,24 +446,24 @@ def shilling_expected_val(n, p, heuristic=False):
 
 
 def shilling_variance(p):
-        """
-        Variance of the Shilling probability density function.
+    """
+    Variance of the Shilling probability density function.
 
-        Notice that the variance only depends on the probability of success, p,
-        not the sequence length, n.
+    Notice that the variance only depends on the probability of success, p,
+    not the sequence length, n.
 
-        Parameters
-        ----------
-        p : float
-            probability of a toss resulting in a head
+    Parameters
+    ----------
+    p : float
+        probability of a toss resulting in a head
 
-        Returns
-        -------
-        variance : float
-            Variance of the probability density function.
+    Returns
+    -------
+    variance : float
+        Variance of the probability density function.
 
-        Examples
-        --------
-        >>> variance = shilling_variance(0.5)
-        """
+    Examples
+    --------
+    >>> variance = shilling_variance(0.5)
+    """
     return (math.pi**2)/(6 * (math.log(1/p))**2) + 1/12.0
